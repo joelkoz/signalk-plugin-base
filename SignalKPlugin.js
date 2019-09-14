@@ -6,6 +6,12 @@
  */
 class SignalKPlugin {
 
+    /**
+     * @param {object} app The ExpressJS app object that was passed from the SignalK server to the plugin factory function
+     * @param {string} id Uniquely identifies this plugin. Usually in the form "signalk-some-plugin"
+     * @param {string} name Human readable name/title of this plugin
+     * @param {string} description A brief description of what this plugin does
+     */
     constructor(app, id, name, description) {
         this.app = app;
         this.id = id;
@@ -207,7 +213,7 @@ class SignalKPlugin {
     /**
      * Outputs a debug message for this plugin. The message will be visible on the
      * console if DEBUG environment variable is set to this plugin's id.
-     * @param {string} msg 
+     * @param {string} msg The message to display on the console output
      */
     debug(msg) {
         this.app.debug(msg);
