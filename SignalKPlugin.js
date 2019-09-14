@@ -1,4 +1,4 @@
-
+"use strict";
 
 /**
  * Base class for creating a SignalK Node Server plugin. This class provides
