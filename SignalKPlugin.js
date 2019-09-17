@@ -94,8 +94,18 @@ class SignalKPlugin {
         this.setStatus("Stopped");
         this.debug(`${this.name} stopped`);
         this.startedOn = -1;
-    };
+    }
 
+
+    /**
+     * Restarts this plugin by calling the "restartPlugin" function that was
+     * passed to the start() method.
+     */
+    restart() {
+        if (this.restartPlugin) {
+            this.restartPlugin();
+        }
+    }
 
 
    /**
