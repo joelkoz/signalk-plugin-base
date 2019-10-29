@@ -19,6 +19,7 @@ class SignalKPlugin {
         this.description = description;
         this._schema = { type: "object", properties: {} };
         this._optContainers = [ this._schema.properties ];
+        this.unsub = [];
     }
 
 
@@ -84,6 +85,10 @@ class SignalKPlugin {
      * @see onPluginStopped
      */
     stop() {
+        if (!this.running) {
+            // Ignore calls to stop() if we are already stopped();
+            return;
+        }
         this.running = false;
         this.debug(`${this.name} stopping`);
         this.unsub.forEach(f => f());
