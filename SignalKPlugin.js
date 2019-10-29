@@ -170,10 +170,19 @@ class SignalKPlugin {
      * 'Subscribes' function f to the stream strm, adding its 'unsubscribe' function
      * to the unsub list.
      * @param {Bacon.Stream} strm 
-     * @param {function} f Any function or method from this object 
+     * @param {function} f Any function or method from an object. If f is a method
+     *   from an object other than 'this', be sure to pass the self parameter.
+     * @param {object} [self=this] Option parameter to specify the 'this' object that
+     *    f should be bound to. Self must be specified if f is a method of an object
+     *    other than 'this' plugin object.
      */
-    subscribeVal(strm, f) {
-        this.unsub.push(strm.onValue(f.bind(this)));
+    subscribeVal(strm, f, self) {
+
+        if (!self) {
+            self = this;
+        }
+
+        this.unsub.push(strm.onValue(f.bind(self)));
     }
     
 
@@ -329,8 +338,10 @@ class SignalKPlugin {
      * @param {string} title A label that describes this option (short form)
      * @param {boolean} [isArray=false] TRUE if this option is actually an array of the defined object
      * @param {string} [longDescription] An optional long description of this option
+     * @param {string} [itemTitle] If the isArray param is TRUE, this is the optional title of an
+     *                  individual element in the array.
      */
-    optObj(optionName, title, isArray, longDescription) {
+    optObj(optionName, title, isArray, longDescription, itemTitle) {
 
         let container = this._optContainers[this._optContainers.length-1];
 
@@ -341,7 +352,7 @@ class SignalKPlugin {
 
         if (isArray) {
             opt.type = 'array';
-            opt.items = { type: 'object', properties: {} };
+            opt.items = { type: 'object', title: itemTitle, properties: {} };
             this._optContainers.push(opt.items.properties);
          }
         else {
@@ -351,6 +362,7 @@ class SignalKPlugin {
         }
         container[optionName] = opt;
     }
+
 
 
     /**
