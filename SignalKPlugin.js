@@ -20,13 +20,20 @@ class SignalKPlugin {
     constructor(app, id, name, description) {
 
         if (app.hasOwnProperty('app') && typeof id === 'undefined') {
-            ({app, id, name, description} = app);
+            // Destructure assignment doesn't work on Node on Rasperry Pi
+            // ({app, id, name, description} = app);
+            this.app = app.app;
+            this.id = app.id;
+            this.name = app.name;
+            this.description = app.description;
+        }
+        else {
+           this.app = app;
+           this.id = id;
+           this.name = name;
+           this.description = description;
         }
 
-        this.app = app;
-        this.id = id;
-        this.name = name;
-        this.description = description;
         this._schema = { type: "object", properties: {} };
         this._optContainers = [ this._schema.properties ];
         this.unsub = [];
@@ -349,10 +356,23 @@ class SignalKPlugin {
         // Support pseudo 'call by name'...
         if (typeof propName === 'object' && typeof title === 'undefined') {
             let oldDV = defaultVal;
-            ({ propName, title, defaultVal, isArray, longDescription, required } = propName);
+
+            // Destructure doesn't work on Node on Raspberry Pi
+            // ({ propName, title, defaultVal, isArray, longDescription, required } = propName);
+            title = propName.title;
+            isArray = propName.isArray;
+            longDescription = propName.longDescription;
+            required = propName.required;
+            defaultVal = propName.defaultVal;
+            propName = propName.propName;
             if (typeof defaultVal === 'undefined') {
                 defaultVal = oldDV;
             }
+        }
+
+        if (required) {
+            this.debug('Json validation not yet support in Plugin editor. Required field will be ignored');
+            required = false;
         }
 
         let opt = {
@@ -403,7 +423,13 @@ class SignalKPlugin {
 
         // Support pseudo 'call by name'...
         if (typeof propName === 'object') {
-            ({ propName, title, isArray, longDescription, itemTitle } = propName);
+            // Destructure doesn't work on Node on Raspberry Pi
+            // ({ propName, title, isArray, longDescription, itemTitle } = propName);
+            title = propName.title;
+            isArray = propName.isArray;
+            longDescription = propName.longDescription;
+            itemTitle = propName.itemTitle;
+            propName = propName.propName;
         }
 
 
