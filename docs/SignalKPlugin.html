@@ -53,6 +53,14 @@ basic behaviors desireable to all plugins.</div>
 
 
 
+<div class="description">
+    Constuctor for the base SignalK Plugin class. This may be called the normal way by using 
+parameter positions to specify the plugin definition, 
+or alternatively using a pseudo 'call by name' where
+the first parameter is an object, and each property name of the object matches
+the corresponding parameter name.
+</div>
+
 
 
 
@@ -212,7 +220,7 @@ basic behaviors desireable to all plugins.</div>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line15">line 15</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line20">line 20</a>
     </li></ul></dd>
     
 
@@ -370,7 +378,7 @@ console if DEBUG environment variable is set to this plugin's id.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line237">line 237</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line252">line 252</a>
     </li></ul></dd>
     
 
@@ -566,7 +574,7 @@ be for ALL contexts. Otherwise, that data will be restricted to
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line148">line 148</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line163">line 163</a>
     </li></ul></dd>
     
 
@@ -704,7 +712,7 @@ will be limited to the "value" property of the data, vs. the entire delta.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line163">line 163</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line178">line 178</a>
     </li></ul></dd>
     
 
@@ -795,7 +803,7 @@ day while the tests are running.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line31">line 31</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line42">line 42</a>
     </li></ul></dd>
     
 
@@ -885,7 +893,7 @@ to them.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line74">line 74</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line85">line 85</a>
     </li></ul></dd>
     
 
@@ -980,7 +988,7 @@ to them.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line115">line 115</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line130">line 130</a>
     </li></ul></dd>
     
 
@@ -1023,7 +1031,7 @@ to them.
     
 
     
-    <h4 class="name" id="optBool"><span class="type-signature"></span>optBool<span class="signature">(optionName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="optBool"><span class="type-signature"></span>optBool<span class="signature">(propName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1031,8 +1039,12 @@ to them.
 
 
 <div class="description">
-    Defines a boolean configuration option that the user can set. The specified optionName
-will appear as a property in this.options, and will have a default value of defaultVal.
+    Defines a boolean configuration option that the user can set. The specified propName
+will appear as a property in this._schema, and will have a default value of defaultVal.
+<p/>This method may be called the normal way by using parameter positions to specify
+your option definition, or alternatively using a pseudo 'call by name' where
+the first parameter is an object, and each property name of the object matches
+the corresponding parameter name.
 </div>
 
 
@@ -1072,7 +1084,7 @@ will appear as a property in this.options, and will have a default value of defa
 
         <tr>
             
-                <td class="name"><code>optionName</code></td>
+                <td class="name"><code>propName</code></td>
             
 
             <td class="type">
@@ -1168,6 +1180,8 @@ will appear as a property in this.options, and will have a default value of defa
 
             
                 <td class="default">
+                
+                    false
                 
                 </td>
             
@@ -1289,7 +1303,7 @@ will appear as a property in this.options, and will have a default value of defa
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line302">line 302</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line340">line 340</a>
     </li></ul></dd>
     
 
@@ -1325,7 +1339,7 @@ will appear as a property in this.options, and will have a default value of defa
     
 
     
-    <h4 class="name" id="optInt"><span class="type-signature"></span>optInt<span class="signature">(optionName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="optInt"><span class="type-signature"></span>optInt<span class="signature">(propName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>, required<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1333,8 +1347,12 @@ will appear as a property in this.options, and will have a default value of defa
 
 
 <div class="description">
-    Defines an interger configuration option that the user can set. The specified optionName
-will appear as a property in this.options, and will have a default value of defaultVal.
+    Defines an interger configuration option that the user can set. The specified propName
+will appear as a property in this._schema, and will have a default value of defaultVal.
+<p/>This method may be called the normal way by using parameter positions to specify
+your option definition, or alternatively using a pseudo 'call by name' where
+the first parameter is an object, and each property name of the object matches
+the corresponding parameter name.
 </div>
 
 
@@ -1374,7 +1392,7 @@ will appear as a property in this.options, and will have a default value of defa
 
         <tr>
             
-                <td class="name"><code>optionName</code></td>
+                <td class="name"><code>propName</code></td>
             
 
             <td class="type">
@@ -1471,6 +1489,8 @@ will appear as a property in this.options, and will have a default value of defa
             
                 <td class="default">
                 
+                    0
+                
                 </td>
             
 
@@ -1554,6 +1574,45 @@ will appear as a property in this.options, and will have a default value of defa
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>required</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">If TRUE, this property must be given a positive non-zero value</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -1591,7 +1650,7 @@ will appear as a property in this.options, and will have a default value of defa
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line288">line 288</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line322">line 322</a>
     </li></ul></dd>
     
 
@@ -1627,7 +1686,7 @@ will appear as a property in this.options, and will have a default value of defa
     
 
     
-    <h4 class="name" id="optNum"><span class="type-signature"></span>optNum<span class="signature">(optionName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="optNum"><span class="type-signature"></span>optNum<span class="signature">(propName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>, required<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1635,8 +1694,12 @@ will appear as a property in this.options, and will have a default value of defa
 
 
 <div class="description">
-    Defines a numeric configuration option that the user can set. The specified optionName
-will appear as a property in this.options, and will have a default value of defaultVal.
+    Defines a numeric configuration option that the user can set. The specified propName
+will appear as a property in this._schema, and will have a default value of defaultVal.
+<p/>This method may be called the normal way by using parameter positions to specify
+your option definition, or alternatively using a pseudo 'call by name' where
+the first parameter is an object, and each property name of the object matches
+the corresponding parameter name.
 </div>
 
 
@@ -1676,7 +1739,7 @@ will appear as a property in this.options, and will have a default value of defa
 
         <tr>
             
-                <td class="name"><code>optionName</code></td>
+                <td class="name"><code>propName</code></td>
             
 
             <td class="type">
@@ -1773,6 +1836,8 @@ will appear as a property in this.options, and will have a default value of defa
             
                 <td class="default">
                 
+                    0
+                
                 </td>
             
 
@@ -1856,6 +1921,45 @@ will appear as a property in this.options, and will have a default value of defa
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>required</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">If TRUE, this property must be given a positive non-zero value</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -1893,7 +1997,7 @@ will appear as a property in this.options, and will have a default value of defa
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line274">line 274</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line303">line 303</a>
     </li></ul></dd>
     
 
@@ -1929,7 +2033,7 @@ will appear as a property in this.options, and will have a default value of defa
     
 
     
-    <h4 class="name" id="optObj"><span class="type-signature"></span>optObj<span class="signature">(optionName, title, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>, itemTitle<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="optObj"><span class="type-signature"></span>optObj<span class="signature">(propName, title, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>, itemTitle<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1938,10 +2042,14 @@ will appear as a property in this.options, and will have a default value of defa
 
 <div class="description">
     Defines configuration option that is itself an object of other properties that the user can set. 
-The specified optionName will appear as a property in this.options. Once this method is called,
+The specified propName will appear as a property in this._schema. Once this method is called,
 all other calls to the optXXX() definition methods will place those properties in this
 object. This will continue until optObjEnd() is called.  You MUST call optObjEnd() when
 the object definition has been completed.
+<p/>This method may be called the normal way by using parameter positions to specify
+your option definition, or alternatively using a pseudo 'call by name' where
+the first parameter is an object, and each property name of the object matches
+the corresponding parameter name.
 </div>
 
 
@@ -1981,7 +2089,7 @@ the object definition has been completed.
 
         <tr>
             
-                <td class="name"><code>optionName</code></td>
+                <td class="name"><code>propName</code></td>
             
 
             <td class="type">
@@ -2199,7 +2307,7 @@ the object definition has been completed.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line344">line 344</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line402">line 402</a>
     </li></ul></dd>
     
 
@@ -2294,7 +2402,7 @@ the object definition has been completed.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line372">line 372</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line436">line 436</a>
     </li></ul></dd>
     
 
@@ -2337,7 +2445,7 @@ the object definition has been completed.
     
 
     
-    <h4 class="name" id="optStr"><span class="type-signature"></span>optStr<span class="signature">(optionName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="optStr"><span class="type-signature"></span>optStr<span class="signature">(propName, title, defaultVal<span class="signature-attributes">opt</span>, isArray<span class="signature-attributes">opt</span>, longDescription<span class="signature-attributes">opt</span>, required<span class="signature-attributes">opt</span>)</span><span class="type-signature"></span></h4>
     
 
     
@@ -2345,8 +2453,12 @@ the object definition has been completed.
 
 
 <div class="description">
-    Defines a string configuration option that the user can set. The specified optionName
-will appear as a property in this.options, and will have a default value of defaultVal.
+    Defines a string configuration option that the user can set. The specified propName
+will appear as a property in this._schema, and will have a default value of defaultVal.
+<p/>This method may be called the normal way by using parameter positions to specify
+your option definition, or alternatively using a pseudo 'call by name' where
+the first parameter is an object, and each property name of the object matches
+the corresponding parameter name.
 </div>
 
 
@@ -2386,7 +2498,7 @@ will appear as a property in this.options, and will have a default value of defa
 
         <tr>
             
-                <td class="name"><code>optionName</code></td>
+                <td class="name"><code>propName</code></td>
             
 
             <td class="type">
@@ -2483,6 +2595,8 @@ will appear as a property in this.options, and will have a default value of defa
             
                 <td class="default">
                 
+                    ''
+                
                 </td>
             
 
@@ -2566,6 +2680,45 @@ will appear as a property in this.options, and will have a default value of defa
         </tr>
 
     
+
+        <tr>
+            
+                <td class="name"><code>required</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+                <td class="default">
+                
+                    false
+                
+                </td>
+            
+
+            <td class="description last">If TRUE, this property must be given a non-blank value</td>
+        </tr>
+
+    
     </tbody>
 </table>
 
@@ -2603,7 +2756,7 @@ will appear as a property in this.options, and will have a default value of defa
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line260">line 260</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line284">line 284</a>
     </li></ul></dd>
     
 
@@ -2692,7 +2845,7 @@ passed to the start() method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line104">line 104</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line119">line 119</a>
     </li></ul></dd>
     
 
@@ -2736,7 +2889,11 @@ passed to the start() method.
 
 
 <div class="description">
-    Returns a schema that lists the user configurable options that this plugin utilizes
+    Returns a Json Schema that defines the user configurable options that this plugin utilizes.
+You can define the value of this schema by calling the various <code>optXXX()</code> methods in
+this class, or you can define the Json schema manually and assign it to the
+<code>this._schema</code> variable.  A third alternative is to override this method in your
+derived class and have it return the Json Schema in any way you see fit.
 </div>
 
 
@@ -2780,7 +2937,7 @@ passed to the start() method.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line245">line 245</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line264">line 264</a>
     </li></ul></dd>
     
 
@@ -2941,7 +3098,7 @@ subscribers. To send more than one value at a time, use sendSKValues()
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line197">line 197</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line212">line 212</a>
     </li></ul></dd>
     
 
@@ -3087,7 +3244,7 @@ server and out to all external subscribers.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line214">line 214</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line229">line 229</a>
     </li></ul></dd>
     
 
@@ -3232,7 +3389,7 @@ will appear on the server admin app
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line133">line 133</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line148">line 148</a>
     </li></ul></dd>
     
 
@@ -3369,7 +3526,7 @@ will appear on the server admin app
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line123">line 123</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line138">line 138</a>
     </li></ul></dd>
     
 
@@ -3459,7 +3616,7 @@ as extensions to this method are generally placed in onPluginStarted()
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line42">line 42</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -3557,7 +3714,7 @@ placed in onPluginStopped().
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line86">line 86</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line97">line 97</a>
     </li></ul></dd>
     
 
@@ -3795,7 +3952,7 @@ to the unsub list.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line179">line 179</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line194">line 194</a>
     </li></ul></dd>
     
 
@@ -3916,7 +4073,7 @@ is useful for matching optional configuration values to stream filters.
 
             
 
-            <td class="description last">The value testVal is to match. If matchVal is empty
+            <td class="description last">The value testVal is to match. If matchVal is empty,
   testvVal ALWAYS matches</td>
         </tr>
 
@@ -3958,7 +4115,7 @@ is useful for matching optional configuration values to stream filters.
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line406">line 406</a>
+        <a href="SignalKPlugin.js.html">SignalKPlugin.js</a>, <a href="SignalKPlugin.js.html#line470">line 470</a>
     </li></ul></dd>
     
 
@@ -4020,7 +4177,7 @@ is useful for matching optional configuration values to stream filters.
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Tue Oct 29 2019 13:28:38 GMT-0400 (Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Sat Nov 02 2019 17:40:03 GMT-0400 (Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

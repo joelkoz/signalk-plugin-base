@@ -7,12 +7,22 @@
 class SignalKPlugin {
 
     /**
+     * Constuctor for the base SignalK Plugin class. This may be called the normal way by using 
+     * parameter positions to specify the plugin definition, 
+     * or alternatively using a pseudo 'call by name' where
+     * the first parameter is an object, and each property name of the object matches
+     * the corresponding parameter name.
      * @param {object} app The ExpressJS app object that was passed from the SignalK server to the plugin factory function
      * @param {string} id Uniquely identifies this plugin. Usually in the form "signalk-some-plugin"
      * @param {string} name Human readable name/title of this plugin
      * @param {string} description A brief description of what this plugin does
      */
     constructor(app, id, name, description) {
+
+        if (app.hasOwnProperty('app') && typeof id === 'undefined') {
+            ({app, id, name, description} = app);
+        }
+
         this.app = app;
         this.id = id;
         this.name = name;
@@ -245,7 +255,11 @@ class SignalKPlugin {
 
 
     /**
-     * Returns a schema that lists the user configurable options that this plugin utilizes
+     * Returns a Json Schema that defines the user configurable options that this plugin utilizes.
+     * You can define the value of this schema by calling the various <code>optXXX()</code> methods in
+     * this class, or you can define the Json schema manually and assign it to the
+     * <code>this._schema</code> variable.  A third alternative is to override this method in your
+     * derived class and have it return the Json Schema in any way you see fit.
      */
     schema() {
         return this._schema;
@@ -254,64 +268,93 @@ class SignalKPlugin {
     
 
     /**
-     * Defines a string configuration option that the user can set. The specified optionName
-     * will appear as a property in this.options, and will have a default value of defaultVal.
-     * @param {string} optionName The name of the property variable used for this option
+     * Defines a string configuration option that the user can set. The specified propName
+     * will appear as a property in this._schema, and will have a default value of defaultVal.
+     * <p/>This method may be called the normal way by using parameter positions to specify
+     * your option definition, or alternatively using a pseudo 'call by name' where
+     * the first parameter is an object, and each property name of the object matches
+     * the corresponding parameter name.
+     * @param {string} propName The name of the property variable used for this option
      * @param {string} title A label that describes this option (short form)
-     * @param {string} [defaultVal] The default value to use for this option
+     * @param {string} [defaultVal=''] The default value to use for this option
      * @param {boolean} [isArray=false] TRUE if this option is actually an array of strings
      * @param {string} [longDescription] An optional long description of this option
+     * @param {boolean} [required=false] If TRUE, this property must be given a non-blank value
      */
-    optStr(optionName, title, defaultVal, isArray, longDescription) {
-        this._defineOption('string', optionName, title, defaultVal, isArray, longDescription);
+    optStr(propName, title, defaultVal, isArray, longDescription, required) {
+        this._defineOption('string', { minLength : 1}, propName, title, (typeof defaultVal !== 'undefined') ? defaultVal: '', isArray, longDescription, required);
     }
 
 
     /**
-     * Defines a numeric configuration option that the user can set. The specified optionName
-     * will appear as a property in this.options, and will have a default value of defaultVal.
-     * @param {string} optionName The name of the property variable used for this option
+     * Defines a numeric configuration option that the user can set. The specified propName
+     * will appear as a property in this._schema, and will have a default value of defaultVal.
+     * <p/>This method may be called the normal way by using parameter positions to specify
+     * your option definition, or alternatively using a pseudo 'call by name' where
+     * the first parameter is an object, and each property name of the object matches
+     * the corresponding parameter name.
+     * @param {string} propName The name of the property variable used for this option
      * @param {string} title A label that describes this option (short form)
-     * @param {number} [defaultVal] The default value to use for this option
+     * @param {number} [defaultVal=0] The default value to use for this option
      * @param {boolean} [isArray=false] TRUE if this option is actually an array of numbers
      * @param {string} [longDescription] An optional long description of this option
+     * @param {boolean} [required=false] If TRUE, this property must be given a positive non-zero value
      */
-    optNum(optionName, title, defaultVal, isArray, longDescription) {
-        this._defineOption('number', optionName, title, defaultVal, isArray, longDescription);
+    optNum(propName, title, defaultVal, isArray, longDescription, required) {
+        this._defineOption('number', { minimum: 1 }, propName, title, (typeof defaultVal !== 'undefined') ? defaultVal: 0, isArray, longDescription, required);
     }
 
 
     /**
-     * Defines an interger configuration option that the user can set. The specified optionName
-     * will appear as a property in this.options, and will have a default value of defaultVal.
-     * @param {string} optionName The name of the property variable used for this option
+     * Defines an interger configuration option that the user can set. The specified propName
+     * will appear as a property in this._schema, and will have a default value of defaultVal.
+     * <p/>This method may be called the normal way by using parameter positions to specify
+     * your option definition, or alternatively using a pseudo 'call by name' where
+     * the first parameter is an object, and each property name of the object matches
+     * the corresponding parameter name.
+     * @param {string} propName The name of the property variable used for this option
      * @param {string} title A label that describes this option (short form)
-     * @param {integer} [defaultVal] The default value to use for this option
+     * @param {integer} [defaultVal=0] The default value to use for this option
      * @param {boolean} [isArray=false] TRUE if this option is actually an array of integers
      * @param {string} [longDescription] An optional long description of this option
+     * @param {boolean} [required=false] If TRUE, this property must be given a positive non-zero value
      */
-    optInt(optionName, title, defaultVal, isArray, longDescription) {
-        this._defineOption('integer', optionName, title, defaultVal, isArray, longDescription);
+    optInt(propName, title, defaultVal, isArray, longDescription, required) {
+        this._defineOption('integer', { minimum: 1 }, propName, title, (typeof defaultVal !== 'undefined') ? defaultVal: 0, isArray, longDescription, required);
     }
 
 
     /**
-     * Defines a boolean configuration option that the user can set. The specified optionName
-     * will appear as a property in this.options, and will have a default value of defaultVal.
-     * @param {string} optionName The name of the property variable used for this option
+     * Defines a boolean configuration option that the user can set. The specified propName
+     * will appear as a property in this._schema, and will have a default value of defaultVal.
+     * <p/>This method may be called the normal way by using parameter positions to specify
+     * your option definition, or alternatively using a pseudo 'call by name' where
+     * the first parameter is an object, and each property name of the object matches
+     * the corresponding parameter name.
+     * @param {string} propName The name of the property variable used for this option
      * @param {string} title A label that describes this option (short form)
-     * @param {boolean} [defaultVal] The default value to use for this option
+     * @param {boolean} [defaultVal=false] The default value to use for this option
      * @param {boolean} [isArray=false] TRUE if this option is actually an array of booleans
      * @param {string} [longDescription] An optional long description of this option
      */
-    optBool(optionName, title, defaultVal, isArray, longDescription) {
-        this._defineOption('boolean', optionName, title, defaultVal, isArray, longDescription);
+    optBool(propName, title, defaultVal, isArray, longDescription) {
+        this._defineOption('boolean', {}, propName, title, (typeof defaultVal !== 'undefined') ? defaultVal: false, isArray, longDescription);
     }
 
 
     // General purpose worker method to set options. Used by the other
     // optXXX() methods.
-    _defineOption(optionType, optionName, title, defaultVal, isArray, longDescription) {
+    _defineOption(optionType, requiredSpec, propName, title, defaultVal, isArray, longDescription, required) {
+
+        // Support pseudo 'call by name'...
+        if (typeof propName === 'object' && typeof title === 'undefined') {
+            let oldDV = defaultVal;
+            ({ propName, title, defaultVal, isArray, longDescription, required } = propName);
+            if (typeof defaultVal === 'undefined') {
+                defaultVal = oldDV;
+            }
+        }
+
         let opt = {
             title,
             default: defaultVal,
@@ -321,32 +364,48 @@ class SignalKPlugin {
         if (isArray) {
            opt.type = 'array';
            opt.items = { type: optionType };
+           if (required) {
+               Object.assign(opt.items, requiredSpec);
+           }
         }
         else {
            opt.type = optionType;
+           if (required) {
+               Object.assign(opt, requiredSpec);
+           }
         }
 
         let container = this._optContainers[this._optContainers.length-1];
-        container[optionName] = opt;
+        container[propName] = opt;
     }
 
 
 
     /**
      * Defines configuration option that is itself an object of other properties that the user can set. 
-     * The specified optionName will appear as a property in this.options. Once this method is called,
+     * The specified propName will appear as a property in this._schema. Once this method is called,
      * all other calls to the optXXX() definition methods will place those properties in this
      * object. This will continue until optObjEnd() is called.  You MUST call optObjEnd() when
      * the object definition has been completed.
+     * <p/>This method may be called the normal way by using parameter positions to specify
+     * your option definition, or alternatively using a pseudo 'call by name' where
+     * the first parameter is an object, and each property name of the object matches
+     * the corresponding parameter name.
      * @see optObjEnd
-     * @param {string} optionName The name of the property variable used for this option
+     * @param {string} propName The name of the property variable used for this option
      * @param {string} title A label that describes this option (short form)
      * @param {boolean} [isArray=false] TRUE if this option is actually an array of the defined object
      * @param {string} [longDescription] An optional long description of this option
      * @param {string} [itemTitle] If the isArray param is TRUE, this is the optional title of an
      *                  individual element in the array.
      */
-    optObj(optionName, title, isArray, longDescription, itemTitle) {
+    optObj(propName, title, isArray, longDescription, itemTitle) {
+
+        // Support pseudo 'call by name'...
+        if (typeof propName === 'object') {
+            ({ propName, title, isArray, longDescription, itemTitle } = propName);
+        }
+
 
         let container = this._optContainers[this._optContainers.length-1];
 
@@ -365,7 +424,7 @@ class SignalKPlugin {
            opt.properties = {};
            this._optContainers.push(opt.properties);
         }
-        container[optionName] = opt;
+        container[propName] = opt;
     }
 
 
@@ -392,9 +451,9 @@ class SignalKPlugin {
     
     // Check an individual option, creating it with the default value if it
     // does not exist.
-    _checkOption(options, optionName) {
-        if (typeof options[optionName] === "undefined") {
-            options[optionName] = this.schema().properties[optionName].default;
+    _checkOption(options, propName) {
+        if (typeof options[propName] === "undefined") {
+            options[propName] = this.schema().properties[propName].default;
         }
     };
 
@@ -404,7 +463,7 @@ class SignalKPlugin {
      * empty matchVal is a wildcard that matches any value of testVal. This method
      * is useful for matching optional configuration values to stream filters.
      * @param {string} testVal The current value you are testing
-     * @param {string} matchVal The value testVal is to match. If matchVal is empty
+     * @param {string} matchVal The value testVal is to match. If matchVal is empty,
      *   testvVal ALWAYS matches
      * @returns TRUE if testVal == matchVal, or if matchVal is empty/blank
      */
