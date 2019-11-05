@@ -52,6 +52,22 @@ class SignalKPlugin {
 
 
     /**
+     * Returns the number of whole seconds that have elapsed between
+     * time t1 and time t2 (both assumed to be the UTC time retrieved via
+     * this.getTime()).  If t2 is unspecified, the current time is assumed.
+     * If t1 is greater than t2, a negative number will be returned.
+     * @param {number} t1 A UTC millisecond value retrieved via this.getTime()
+     * @param {number} [t2=this.getTime()] A UTC millisecond value retrieved via this.getTime()
+     */
+    elapsedSecs(t1, t2) {
+        if (_.isUndefined(t2)) {
+            t2 = this.getTime();
+        }
+        return Math.round((t2 - t1) / 1000);
+    }
+
+
+    /**
      * Called when the plugin starts. Descendant classes can override, but
      * should call super.start() if they do. Overriding is normally not necessary
      * as extensions to this method are generally placed in onPluginStarted()
