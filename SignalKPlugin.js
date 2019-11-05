@@ -60,7 +60,7 @@ class SignalKPlugin {
      * @param {number} [t2=this.getTime()] A UTC millisecond value retrieved via this.getTime()
      */
     elapsedSecs(t1, t2) {
-        if (_.isUndefined(t2)) {
+        if (typeof t2 === 'undefined') {
             t2 = this.getTime();
         }
         return Math.round((t2 - t1) / 1000);
