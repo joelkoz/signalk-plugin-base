@@ -45,9 +45,10 @@ class SignalKPlugin {
      * whenever the current time is needed. External unit tests
      * may monkey patch this method to return a simulated time of
      * day while the tests are running.
+     * @deprecated Use Date.now() instead (which can also be monkey patched)
      */
     getTime() {
-      return new Date().getTime();
+      return Date.now();
     }
 
 
