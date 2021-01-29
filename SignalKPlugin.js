@@ -160,7 +160,7 @@ class SignalKPlugin {
      * @param {string} msg 
      */
     setStatus(msg) {
-        this.app.setProviderStatus(msg);
+        this.app.setPluginStatus(msg);
     }
     
 
@@ -170,7 +170,7 @@ class SignalKPlugin {
      * @param {string} msg 
      */
     setError(msg) {
-        this.app.setProviderError(msg);
+        this.app.setPluginError(msg);
     }
 
     
